@@ -7,6 +7,8 @@ int     ft_strlen(char **strs)
         int     compteur;
 
         i = 0;
+        j = 0;
+        compteur = 0;
         while (strs[j])
         {
                 while(strs[j][i])
@@ -20,7 +22,7 @@ int     ft_strlen(char **strs)
 }
 
 #include <unistd.h>
-char    ft_strjoin(int size,char **strs, char *sep)
+char    *ft_strjoin(int size,char **strs, char *sep)
 {
     int    i;
     int    j;
@@ -31,7 +33,7 @@ char    ft_strjoin(int size,char **strs, char *sep)
     j = 0;
     if (!strs)
         return (NULL);
-    *tab = malloc(sizeof(char) * ft_strlen(strs) + size);
+    tab = malloc(sizeof(char) * ft_strlen(strs) + size);
     if (!tab)
         return (NULL);
     while (strs[j])
@@ -46,14 +48,14 @@ char    ft_strjoin(int size,char **strs, char *sep)
         k = 0;
         j++;
     }
-    return (&tab);
+    return (tab);
 }
 
 
 #include <stdio.h>
 int main (void)
 {
-        char *strs[3] = {"salut","la","team"};
+        char *strs[3] = {"salut","groot","team"};
         char *sep = "-";
         char *tab = ft_strjoin(3, strs, sep);
 
@@ -61,4 +63,3 @@ int main (void)
         free(tab);
         return(0);
 }
-
