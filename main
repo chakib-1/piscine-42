@@ -22,14 +22,21 @@ int     ft_ultimate_range(int **range, int min, int max)
         return (i);
 }
 
-
 #include <stdio.h>
 
 int     main(void)
 {
         int     i;
+        int     c;
+        int     *range;
 
-        i = ft_ultimate_range (0,1,9);
+        i = ft_ultimate_range (&range, -7, 7);
         printf("size: %d\n", i);
+        c = 0;
+        while (range[c])
+        {
+                printf("%d\n", range[c]);
+                c++;
+        }
         return(0);
 }
