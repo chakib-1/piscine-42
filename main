@@ -1,0 +1,19 @@
+
+#include <stdio.h>
+
+int	main(void)
+{
+	int	*arr;
+	int	i;
+
+	i = ft_ultimate_range(&arr, 1, 10);
+	printf("size: %d\n", i);
+	i = 0;
+	while (i < 9)
+	{
+		printf("%d\n", arr[i]);
+		i++;
+	}
+	free(arr);
+	return (0);
+}
