@@ -1,42 +1,64 @@
 #include <stdlib.h>
 
-int     ft_ultimate_range(int **range, int min, int max)
+int     ft_strlen(char **strs)
 {
         int     i;
+        int     j;
+        int     compteur;
 
         i = 0;
-        if (min >= max)
+        while (strs[j])
         {
-                *range = NULL;
-                return (0);
+                while(strs[j][i])
+                {
+                        i++;
+                        compteur++;
+                }
+        j++;
         }
-        *range = malloc(sizeof(int) * (max - min));
-        if (*range == NULL)
-                return (-1);
-        while (min < max)
-        {
-                (*range)[i] = min;
-                min++;
-                i++;
-        }
-        return (i);
+        return (compteur);
 }
+
+#include <unistd.h>
+char    ft_strjoin(int size,char **strs, char *sep)
+{
+    int    i;
+    int    j;
+    int    k;
+    char    *tab;
+
+    i = 0;
+    j = 0;
+    if (!strs)
+        return (NULL);
+    *tab = malloc(sizeof(char) * ft_strlen(strs) + size);
+    if (!tab)
+        return (NULL);
+    while (strs[j])
+    {
+        while(strs[j][k])
+        {
+                tab[i] = strs[j][k];
+                i++;
+                k++;
+        }
+        write(1, &sep, 1);
+        k = 0;
+        j++;
+    }
+    return (&tab);
+}
+
 
 #include <stdio.h>
-
-int     main(void)
+int main (void)
 {
-        int     i;
-        int     c;
-        int     *range;
+        char *strs[3] = {"salut","la","team"};
+        char *sep = "-";
+        char *tab = ft_strjoin(3, strs, sep);
 
-        i = ft_ultimate_range (&range, -7, 7);
-        printf("size: %d\n", i);
-        c = 0;
-        while (range[c])
-        {
-                printf("%d\n", range[c]);
-                c++;
-        }
+        printf("%s", tab);
+        free(tab);
         return(0);
 }
+
