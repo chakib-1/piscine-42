@@ -33,25 +33,25 @@ char    *ft_strjoin(int size,char **strs, char *sep)
     i = 0;
     j = 0;
     k = 0;
+    if (size == 0)
+            tab = malloc(1);
     if (!strs)
         return (NULL);
     tab = malloc(sizeof(char) * ft_strlen(strs) + size);
     if (!tab)
         return (NULL);
-    while (strs[j])
+    while (j < size)
     {
-        while(j < size -1)
+        while(strs[j][k])
         {
-                tab[i] = strs[j][k];
+                tab[i] = strs[j][k++];
                 i++;
-                k++;
         }
-        tab[i] = sep[0];
+        if(j < size - 1)
+                        tab[i++] = sep[0];
         k = 0;
-        i++;
         j++;
     }
-    tab[i] = '\0';
     return (tab);
 }
 
