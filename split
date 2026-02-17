@@ -1,0 +1,42 @@
+int     nb_mot(char *str, char *charset)
+{
+        int     i;
+        int     j;
+        int     compteur;
+
+        j = 0;
+        compteur = 0;
+        while (charset[j])
+        {
+                i = 0;
+                while (str[i])
+                {
+                        if ((str[i - 1] == charset[j] && str[i] != charset[j])
+                                || (i == 0 && str[i] != charset[j]))
+                                compteur++;
+                        i++;
+                }
+        j++;
+        }
+        return(compteur);
+}
+
+int     str_len(char *str)
+{
+        int i;
+        while(str[i])
+                i++;
+        return(i);
+}
+
+char    **ft_split(char *str, char *charset)
+{
+        int     i;
+        char **tab;
+
+        if(str == NULL);
+                return(NULL);
+        tab = malloc(sizeof(char*) * nb_mot(str, charset));
+        if(tab == NULL)
+                return (NULL);
+        tab = malloc(sizeof(char))
