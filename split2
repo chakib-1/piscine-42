@@ -1,0 +1,90 @@
+#include <stdlib.h>
+
+int	is_sep(char c, char *charset)
+{
+	int	i;
+
+	i = 0;
+	while (charset[i])
+	{
+		if (c == charset[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	nb_mot(char *str, char *charset)
+{
+	int	i;
+	int	compteur;
+
+	i = 0;
+	compteur = 0;
+	while (str[i])
+	{
+		if (!is_sep(str[i], charset)
+			&& (i == 0 || is_sep(str[i - 1], charset)))
+			compteur++;
+		i++;
+	}
+	return (compteur);
+}
+
+int	len_mot(char *str, char *charset)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && !is_sep(str[i], charset))
+		i++;
+	return (i);
+}
+
+char	*copy_mot(char *str, char *charset)
+{
+	char	*mot;
+	int		i;
+	int		len;
+
+	i = 0;
+	len = len_mot(str, charset);
+	mot = malloc(sizeof(char) * (len + 1));
+	if (!mot)
+		return (NULL);
+	while (i < len)
+	{
+		mot[i] = str[i];
+		i++;
+	}
+	mot[i] = '\0';
+	return (mot);
+}
+
+char	**ft_split(char *str, char *charset)
+{
+	char	**tab;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!str)
+		return (NULL);
+	tab = malloc(sizeof(char *) * (nb_mot(str, charset) + 1));
+	if (!tab)
+		return (NULL);
+	while (str[i])
+	{
+		if (!is_sep(str[i], charset))
+		{
+			tab[j++] = copy_mot(&str[i], charset);
+			while (str[i] && !is_sep(str[i], charset))
+				i++;
+		}
+		else
+			i++;
+	}
+	tab[j] = NULL;
+	return (tab);
+}
